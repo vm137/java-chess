@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static com.epam.phonechess.ChessPiece.KNIGHT;
+import static com.epam.phonechess.ChessPiece.PAWN;
 import static com.epam.phonechess.Node.getDigit;
 import static com.epam.phonechess.Position.numberToPosition;
 
@@ -31,7 +32,7 @@ public class Solution {
     }
 
     void addNextPositions(Node node, Function<Position, List<Position>> nextStepsFn) {
-        if (node.depth > 6) {
+        if (node.depth > 7) {
             node.setNextSteps(null);
             return;
         }
@@ -56,10 +57,12 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        List<String> phones = solution.getPhones(2, KNIGHT);
+        System.out.println("KNIGHT");
+        List<String> phones = solution.getPhones(7, KNIGHT);
         System.out.println(phones);
 
-//        List<String> phones = solution.getPhones(2, PAWN);
-//        System.out.println(phones);
+        System.out.println("PAWN");
+        List<String> phones2 = solution.getPhones(0, PAWN);
+        System.out.println(phones2);
     }
 }

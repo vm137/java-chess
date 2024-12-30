@@ -17,12 +17,12 @@ public class Solution {
         Node startNode = new Node(startPosition, 0);
 
         Function<Position, List<Position>> fn = switch (piece) {
-            case KING -> ChessSteps::nextKingSteps;
-            case QUEEN -> ChessSteps::nextQueenSteps;
-            case ROOK -> ChessSteps::nextRookSteps;
-            case BISHOP -> ChessSteps::nextBishopSteps;
-            case KNIGHT -> ChessSteps::nextKnightSteps;
-            case PAWN -> ChessSteps::nextPawnSteps;
+            case KING -> PieceMoves::nextKingSteps;
+            case QUEEN -> PieceMoves::nextQueenSteps;
+            case ROOK -> PieceMoves::nextRookSteps;
+            case BISHOP -> PieceMoves::nextBishopSteps;
+            case KNIGHT -> PieceMoves::nextKnightMoves;
+            case PAWN -> PieceMoves::nextPawnSteps;
         };
 
         addNextPositions(startNode, fn);
@@ -32,23 +32,23 @@ public class Solution {
 
     void addNextPositions(Node node, Function<Position, List<Position>> nextStepsFn) {
         if (node.depth > 6) {
-            node.setChildren(null);
+            node.setNextSteps(null);
             return;
         }
         List<Position> nextPositions = nextStepsFn.apply(node.getPosition());
         for (Position nextPosition : nextPositions) {
             Node nextNode = new Node(nextPosition, node.depth + 1);
-            node.children.add(nextNode);
+            node.nextSteps.add(nextNode);
             addNextPositions(nextNode, nextStepsFn);
         }
     }
 
     private void addNextDigit(String prefix, Node node) {
         String currentPhone = prefix + getDigit(node);
-        if (node.getChildren() == null) {
+        if (node.getNextSteps() == null) {
             phones.add(currentPhone);
         } else {
-            for (Node n : node.getChildren()) {
+            for (Node n : node.getNextSteps()) {
                 addNextDigit(currentPhone, n);
             }
         }

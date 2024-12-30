@@ -5,18 +5,20 @@ import java.util.List;
 
 import static com.epam.phonechess.Field.isPositionValid;
 
-public class ChessSteps {
-    private ChessSteps() {}
+public class PieceMoves {
+    private PieceMoves() {}
 
-    public static List<Position> nextKnightSteps(Position start) {
-        Position p1 = new Position(start.getX() + 2, start.getY() + 1);
-        Position p2 = new Position(start.getX() + 2, start.getY() - 1);
-        Position p3 = new Position(start.getX() - 2, start.getY() + 1);
-        Position p4 = new Position(start.getX() - 2, start.getY() - 1);
-        Position p5 = new Position(start.getX() + 1, start.getY() + 2);
-        Position p6 = new Position(start.getX() - 1, start.getY() - 2);
-        Position p7 = new Position(start.getX() + 1, start.getY() + 2);
-        Position p8 = new Position(start.getX() - 1, start.getY() - 2);
+    public static List<Position> nextKnightMoves(Position start) {
+        int x = start.getX();
+        int y = start.getY();
+        Position p1 = new Position(x + 2, y + 1);
+        Position p2 = new Position(x + 2, y - 1);
+        Position p3 = new Position(x - 2, y + 1);
+        Position p4 = new Position(x - 2, y - 1);
+        Position p5 = new Position(x + 1, y + 2);
+        Position p6 = new Position(x + 1, y - 2);
+        Position p7 = new Position(x - 1, y + 2);
+        Position p8 = new Position(x - 1, y - 2);
 
         List<Position> nextPositions = new ArrayList<>();
         if (isPositionValid(p1)) {nextPositions.add(p1);}
@@ -57,6 +59,7 @@ public class ChessSteps {
         if (isPositionValid(p3)) {nextPositions.add(p3);}
         Position p4 = new Position(start.getX(), start.getY() - 1);
         if (isPositionValid(p4)) {nextPositions.add(p4);}
+
         return nextPositions;
     }
 }

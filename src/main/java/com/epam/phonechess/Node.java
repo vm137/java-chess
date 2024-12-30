@@ -10,7 +10,7 @@ import static com.epam.phonechess.Position.positionToNumber;
 @Data
 public class Node {
     Position position;
-    List<Node> children = new ArrayList<>();
+    List<Node> nextSteps = new ArrayList<>();
     int depth;
 
     public Node(Position position, int depth) {
